@@ -1,0 +1,147 @@
+package entity;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner;
+
+import interfaces.CalculadoraSalario;
+import interfaces.Gerenciamento;
+
+public class SistemaMedico implements Gerenciamento {
+	private static List <Medico> medicos=new ArrayList<>();
+	Scanner sc = new Scanner(System.in);
+	 
+	 
+	@Override
+	public void Incluir() {
+		 System.out.println("\n--- Cadastro de Médico ---");
+		    
+		    System.out.print("Nome do Médico: ");
+		    String nome = sc.nextLine();
+		    
+		    System.out.print("CPF do Médico: ");
+		    String cpf = sc.nextLine();
+		    
+		    System.out.print("Especialidade do Médico: ");
+		    String especialidade = sc.nextLine();
+		    
+		    System.out.print("Salário por hora do Médico: ");
+		    double salarioHora = sc.nextDouble();
+		    sc.nextLine(); 
+		    
+		    CalculadoraSalario calculadora;
+		    if (especialidade.equalsIgnoreCase("Generalista")) {
+		        calculadora = new CalculoGeneralista();
+		    } else {
+		        calculadora = new CalculoEspecialista();
+		    }
+		    
+		    Medico medico = new Medico(nome, cpf, especialidade, salarioHora, calculadora);
+		    medicos.add(medico);
+		    
+		    System.out.println("Médico cadastrado com sucesso!");
+		  
+		
+	}
+	
+	public void IncluirAuto() {
+		medicos.add(new Medico("Dr. Everton Oliveira", "1", "Cardiologista", 150.0, new CalculoEspecialista()));
+		medicos.add(new Medico("Dr. Thiago Sampaio", "2", "Pediatra", 120.0, new CalculoEspecialista()));
+		medicos.add(new Medico("Dr. Vitor Thadeu", "3", "Generalista", 100.0, new CalculoGeneralista()));
+		medicos.add(new Medico("Dr. Silas Pereira", "4", "Ortopedista", 180.0, new CalculoEspecialista()));
+		medicos.add(new Medico("Dr. Poggers da Silva", "5", "Generalista", 100.0, new CalculoGeneralista()));
+		medicos.add(new Medico("Dra. Noggers da Silva", "6", "Neurologista", 200.0, new CalculoEspecialista()));
+		medicos.add(new Medico("Dr. Jeguelson Albuquerque", "7", "Generalista", 100.0, new CalculoGeneralista()));
+		
+	}
+
+	@Override
+	public void Alterar() {
+		 System.out.print("\nDigite o cpf do médico a ser alterado");
+		 String cpf = sc.nextLine();
+		 for (Medico medico : medicos) {
+			if (medico.getCpf().equals(cpf)) {
+				System.out.print("\nDigite a nova especialidade do medico");
+				String novaEspecialidade=sc.nextLine();
+				medico.setEspecialidade(novaEspecialidade);
+				System.out.print("\nEspecialidade alterada com sucesso");
+				
+			}
+		}
+		
+	}
+
+	@Override
+	public void Excluir() {
+		
+		   System.out.print("Digite o CPF do Medico que deseja remover: ");
+		    String cpf = sc.nextLine();
+
+		    Medico Removedor = null;
+		    for (Medico medico : medicos) {
+		        if (medico.getCpf().equals(cpf)) {
+		        	Removedor = medico;
+		            break;
+		        }
+		    }
+
+		    if (Removedor == null) {
+		        System.out.println("Consulta não encontrada para a remoção!");
+		    } else {
+		        medicos.remove(Removedor);
+		        System.out.println("Consulta removida com sucesso!");
+		    }
+		
+	}
+
+	@Override
+	public void Listar() {
+		medicos.sort(Comparator.comparing(Medico::getNome));
+		for (Medico medico : medicos) {
+			System.out.println(medico.exibirDetalhes());
+		}
+		
+	}
+
+	@Override
+	public void Buscar(String Cpf) {
+		for (Medico medico : medicos) {
+			if (medico.getCpf().equals(Cpf)) {
+				System.out.println(medico.exibirDetalhes());
+			}
+		}
+		
+	}
+	
+	public void MostraSalario(String Cpf) {
+		for (Medico medico : medicos) {
+			if (medico.getCpf().equals(Cpf)) {
+				System.out.println("Forneça as horas trabalhadas");
+				int horas=sc.nextInt();
+				sc.nextLine();
+				double salario=medico.calculaSalario(horas);
+				System.out.println("Salário do Médico "+ medico.getNome()+":" + String.format("R$ %.2f", salario) );
+				
+			}
+		}
+	}
+	
+
+	public static Medico Retorna(String cpf) {
+	    for (Medico medico : medicos) {
+	        if (medico.getCpf().equals(cpf)) {
+	            return medico;
+	        }
+	    }
+	    return null;
+	}
+	
+	
+
+	
+	
+	
+	
+	
+}
