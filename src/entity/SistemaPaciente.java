@@ -1,22 +1,42 @@
 package entity;
 
+import interfaces.Gerenciamento;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import interfaces.Gerenciamento;
-
+// Classe responsável por gerenciar os pacientes do sistema//
 public class SistemaPaciente implements Gerenciamento {
+
+	//Lista de pacientes 
 	private static List <Paciente> pacientes=new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 	
-	
+	// Método para incluir paciente manualmente
 	@Override
 	public void Incluir() {
+		System.out.println("\n--- Cadastro de Paciente ---");
+
+        System.out.print("Nome do paciente: ");
+        String nome = sc.nextLine();
+
+        System.out.print("CPF do paciente: ");
+        String cpf = sc.nextLine();
+
+       System.out.print("Idade do paciente: ");
+		int idade = sc.nextInt();
+		sc.nextLine(); 
+
+		Paciente paciente = new Paciente(nome, cpf, idade);
+		pacientes.add(paciente);
+
+
+        System.out.println("Paciente cadastrado com sucesso!");
 		 
-		
 	}
+
+	// Método para cadastrar pacientes automáticamente
 	public void IncluirAuto() {
 		 pacientes.add(new Paciente("Everton Oliveira", "12", 25));
 	     pacientes.add(new Paciente("Maria Silva", "13", 30));
@@ -28,6 +48,7 @@ public class SistemaPaciente implements Gerenciamento {
 		
 	}
 
+	// Método para alterar a idade do paciente 
 	@Override
 	public void Alterar() {
 		
@@ -46,6 +67,7 @@ public class SistemaPaciente implements Gerenciamento {
 		
 	}
 
+	// Método para excluir paciente
 	@Override
 	public void Excluir() {
 		
@@ -61,14 +83,15 @@ public class SistemaPaciente implements Gerenciamento {
 		    }
 
 		    if (Removedor == null) {
-		        System.out.println("Consulta não encontrada para a remoção!");
+		        System.out.println("Paciente não encontrado para a remoção!");
 		    } else {
 		        pacientes.remove(Removedor);
-		        System.out.println("Consulta removida com sucesso!");
+		        System.out.println("Paciente removido com sucesso!");
 		    }
 		
 	}
 
+	// Método para listar os pacientes em ordem alfabética
 	@Override
 	public void Listar() {
 		pacientes.sort(Comparator.comparing(Paciente::getNome));
@@ -78,6 +101,7 @@ public class SistemaPaciente implements Gerenciamento {
 		
 	}
 
+	// Método para buscar um paciente por CPF
 	@Override
 	public void Buscar(String Cpf) {
 		for (Paciente paciente : pacientes) {
@@ -88,6 +112,7 @@ public class SistemaPaciente implements Gerenciamento {
 		
 	}
 	
+	// Método auxiliar que retorna um objeto médico pelo CPF (usado por outras classes)
 	public static Paciente Retorna(String cpf) {
 	    for (Paciente paciente : pacientes) {
 	        if (paciente.getCpf().equals(cpf)) {

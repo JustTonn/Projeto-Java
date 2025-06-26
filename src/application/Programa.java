@@ -1,24 +1,28 @@
 package application;
 
-import java.util.Scanner;
-
 import entity.SistemaConsultas;
 import entity.SistemaMedico;
 import entity.SistemaPaciente;
+import java.util.Scanner;
 
+// Classe principal que contém o menu principal e inicia o sistema
 public class Programa {
 	public static void main(String[] args) {
+        
         Scanner sc = new Scanner(System.in);
+
+        // Instanciando os sistemas de médico, paciente e consultas
         SistemaMedico sistemaMedico = new SistemaMedico();
         SistemaPaciente sistemaPaciente = new SistemaPaciente();
         SistemaConsultas sistemaConsultas = new SistemaConsultas();
         
-        // aqui é pra cadastrar os dados automaticamente, professor pediu
+        // Cadastro automático de médicos, pacientes e consultas
         sistemaMedico.IncluirAuto();
         sistemaPaciente.IncluirAuto();
         sistemaConsultas.IncluirAuto();
         
         int opcao;
+        // Menu principal
         do {
             System.out.println("\n===== SISTEMA CLÍNICA MÉDICA =====");
             System.out.println("1. Gerenciamento de Médicos");
@@ -51,6 +55,7 @@ public class Programa {
         sc.close();
     }
     
+    // Submenu de gerenciamento de médicos
     private static void menuMedicos(Scanner sc, SistemaMedico sistema) {
         int opcao;
         do {
@@ -100,6 +105,7 @@ public class Programa {
         } while(opcao != 0);
     }
     
+    // Submenu de gerenciamento de pacientes
     private static void menuPacientes(Scanner sc, SistemaPaciente sistema) {
         int opcao;
         do {
@@ -141,6 +147,7 @@ public class Programa {
         } while(opcao != 0);
     }
     
+    // Submenu de gerenciamento de consultas
     private static void menuConsultas(Scanner sc, SistemaConsultas sistema) {
         int opcao;
         do {

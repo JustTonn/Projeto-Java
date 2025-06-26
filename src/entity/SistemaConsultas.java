@@ -1,5 +1,6 @@
 package entity;
 
+import interfaces.Gerenciamento;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,14 +8,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import interfaces.Gerenciamento;
-
+// Classe que gerencia as consultas médicas no sistema
 public class SistemaConsultas implements Gerenciamento {
+
+	//Lista de consultas
 	private static List <Consulta> consultas=new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-	
+	// Método para cadastrar uma nova consulta manualmente
 	@Override
 	public void Incluir() {
 		try {
@@ -55,7 +57,7 @@ public class SistemaConsultas implements Gerenciamento {
 	}
 
 		
-	
+	// Método para cadastrar consultas automaticamente (sem digitação) 
 	public void IncluirAuto() {
 		try {
 	        System.out.println("----- Cadastro de Consulta -----");
@@ -111,7 +113,7 @@ public class SistemaConsultas implements Gerenciamento {
 		
 	}
 	
-
+	// Método para lista todas as consultas
 	@Override
 	public void Listar() {
 		consultas.sort(Comparator.comparing(Consulta::getData));
@@ -121,6 +123,7 @@ public class SistemaConsultas implements Gerenciamento {
 		
 	}
 
+	//Método para excluir uma consuta
 	@Override
 	public void Excluir() {
 		
@@ -143,6 +146,7 @@ public class SistemaConsultas implements Gerenciamento {
 	    }
 	}
 
+	//Método para alterar o nome do paciente pelo cpf
 	@Override
 	public void Alterar() {
 		 System.out.print("\nDigite o cpf do paciente a ser alterado");
@@ -158,6 +162,7 @@ public class SistemaConsultas implements Gerenciamento {
 		}
 	}
 
+	//Método para buscar consulta pelo cpf do paciente
 	@Override
 	public void Buscar(String Cpf) {
 		for (Consulta consulta : consultas) {

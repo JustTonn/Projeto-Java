@@ -1,18 +1,20 @@
 package entity;
 
+import interfaces.CalculadoraSalario;
+import interfaces.Gerenciamento;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-import interfaces.CalculadoraSalario;
-import interfaces.Gerenciamento;
-
+// Classe responsável por gerenciar os médicos cadastrados no sistema
 public class SistemaMedico implements Gerenciamento {
+
+	// Lista de médicos 
 	private static List <Medico> medicos=new ArrayList<>();
 	Scanner sc = new Scanner(System.in);
 	 
-	 
+	 // Método para incluir um médico manualmente (digitado pelo usuário)
 	@Override
 	public void Incluir() {
 		 System.out.println("\n--- Cadastro de Médico ---");
@@ -30,6 +32,7 @@ public class SistemaMedico implements Gerenciamento {
 		    double salarioHora = sc.nextDouble();
 		    sc.nextLine(); 
 		    
+			// Define o tipo de cálculo de salário com base na especialidade
 		    CalculadoraSalario calculadora;
 		    if (especialidade.equalsIgnoreCase("Generalista")) {
 		        calculadora = new CalculoGeneralista();
@@ -37,6 +40,7 @@ public class SistemaMedico implements Gerenciamento {
 		        calculadora = new CalculoEspecialista();
 		    }
 		    
+			// Cria o objeto médico e adiciona à lista
 		    Medico medico = new Medico(nome, cpf, especialidade, salarioHora, calculadora);
 		    medicos.add(medico);
 		    
@@ -45,6 +49,7 @@ public class SistemaMedico implements Gerenciamento {
 		
 	}
 	
+	 // Método para cadastrar médicos automaticamente (sem digitação) 
 	public void IncluirAuto() {
 		medicos.add(new Medico("Dr. Everton Oliveira", "1", "Cardiologista", 150.0, new CalculoEspecialista()));
 		medicos.add(new Medico("Dr. Thiago Sampaio", "2", "Pediatra", 120.0, new CalculoEspecialista()));
@@ -56,6 +61,7 @@ public class SistemaMedico implements Gerenciamento {
 		
 	}
 
+	//Método para alterar a especialidade do médico pelo cpf
 	@Override
 	public void Alterar() {
 		 System.out.print("\nDigite o cpf do médico a ser alterado");
@@ -72,6 +78,7 @@ public class SistemaMedico implements Gerenciamento {
 		
 	}
 
+	//Método para excluir um médico pelo cpf
 	@Override
 	public void Excluir() {
 		
@@ -87,14 +94,15 @@ public class SistemaMedico implements Gerenciamento {
 		    }
 
 		    if (Removedor == null) {
-		        System.out.println("Consulta não encontrada para a remoção!");
+		        System.out.println("Médico não encontrado para a remoção!");
 		    } else {
 		        medicos.remove(Removedor);
-		        System.out.println("Consulta removida com sucesso!");
+		        System.out.println("Médico removido com sucesso!");
 		    }
 		
 	}
 
+	//Método para listar todos os médicos, em ordem alfabética
 	@Override
 	public void Listar() {
 		medicos.sort(Comparator.comparing(Medico::getNome));
@@ -104,6 +112,7 @@ public class SistemaMedico implements Gerenciamento {
 		
 	}
 
+	//Método para buscar o médico pelo cpf e exibir seus dados
 	@Override
 	public void Buscar(String Cpf) {
 		for (Medico medico : medicos) {
@@ -114,6 +123,7 @@ public class SistemaMedico implements Gerenciamento {
 		
 	}
 	
+	//Método que mostra o salário de um médico conforme as horas trabalhadas
 	public void MostraSalario(String Cpf) {
 		for (Medico medico : medicos) {
 			if (medico.getCpf().equals(Cpf)) {
@@ -127,7 +137,7 @@ public class SistemaMedico implements Gerenciamento {
 		}
 	}
 	
-
+	// Método auxiliar que retorna um objeto médico pelo CPF (usado por outras classes)
 	public static Medico Retorna(String cpf) {
 	    for (Medico medico : medicos) {
 	        if (medico.getCpf().equals(cpf)) {
