@@ -4,10 +4,15 @@ import java.util.Date;
 
 
 public class Consulta {
+
+	// Atributos da classe: médico, paciente e data da consulta
 	Medico medico;
 	Paciente paciente;
 	Date data;
+
 	static SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yy");
+	
+	// Construtor que inicializa os atributos da consulta
 	public Consulta(Medico medico, Paciente paciente, Date data) {
 		super();
 		this.medico = medico;
@@ -31,6 +36,7 @@ public class Consulta {
 		return data;
 	}
 
+	// Retorna o nome do médico, do paciente e a data formatada
 	@Override
 	public String toString() {
 		StringBuilder sb=new StringBuilder();

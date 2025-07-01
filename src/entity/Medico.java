@@ -1,12 +1,17 @@
 package entity;
 
+// Importa a interface usada para calcular o salário
 import interfaces.CalculadoraSalario;
 
+// A classe Medico herda de Pessoa
 public class Medico extends Pessoa  {
+
+	// Atributos do médico
 	private String especialidade;
 	private Double salarioHoraBase;
 	private CalculadoraSalario calculadoraSalario;//utilizando o conceito de interface
 	
+	// Construtor completo, inicializa todos os atributos
 	public Medico(String nome, String cpf,String especialidade,Double salarioHoraBase,CalculadoraSalario calculadoraSalario) {
 		super(nome, cpf);
 		this.especialidade=especialidade;
@@ -14,10 +19,13 @@ public class Medico extends Pessoa  {
 		this.calculadoraSalario=calculadoraSalario;
 	}
 	
+	// Construtor alternativo com menos informações (sobrecarga)
 	public Medico(String nome, String cpf,String especialidade) {
 		super(nome, cpf);
 	}
 	
+	// Método que calcula o salário do médico
+	// Calcula o salário usando a lógica passada pela interface CalculadoraSalario
 	public double calculaSalario(int horas) { //aqui é passado os valores necessários para calcular o salário
 		return calculadoraSalario.calcular(salarioHoraBase,horas);
 	}
@@ -38,7 +46,7 @@ public class Medico extends Pessoa  {
 		return salarioHoraBase;
 	}
 
-
+	// Sobrescreve o método exibirDetalhes() herdado de Pessoa (Polimorfismo)
 	@Override
 	public String exibirDetalhes() {
 		return ("Médico: "+ getNome() + " Especialidade: " + especialidade +" Cpf: " + getCpf() );
