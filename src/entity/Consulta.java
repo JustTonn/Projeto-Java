@@ -40,7 +40,7 @@ public class Consulta {
 	@Override
 	public String toString() {
 		StringBuilder sb=new StringBuilder();
-		sb.append("Medico: "+ medico.getNome() + " Paciente: " + paciente.getNome());
+		sb.append("Medico: "+ medico.getNome() + " Paciente: " + paciente.getNome() + " ");
 		sb.append("Data:");
 		sb.append(sdf.format(data) + "\n");
 		

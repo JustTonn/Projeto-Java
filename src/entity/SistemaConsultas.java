@@ -40,7 +40,7 @@ public class SistemaConsultas implements Gerenciamento {
 	        Paciente paciente = SistemaPaciente.Retorna(cpfPaciente);
 	        Consulta consulta = new Consulta(medico, paciente, data);
 			
-			 if (SistemaMedico.Retorna(cpfMedico)==null||SistemaPaciente.Retorna(cpfPaciente)==null ) {
+			 if (medico == null || paciente == null)  {
 	        	 System.out.println("Erro no Cadastro da Consulta!");
 				 
 			}
@@ -71,38 +71,38 @@ public class SistemaConsultas implements Gerenciamento {
 	        Date data7 = sdf.parse("07/06/2025");
 
 	        // Consulta 1
-	        Medico m1 = new Medico("Dr. Everton Oliveira", "60", "Cardiologista");
-	        Paciente p1 = new Paciente("Carlinhos ", "61", 45);
+	        Medico m1 = SistemaMedico.Retorna("1");
+	        Paciente p1 = SistemaPaciente.Retorna("12");
 	        consultas.add(new Consulta(m1, p1, data1));
 
 	        // Consulta 2
-	        Medico m2 = new Medico("Dr. Bruno", "62", "Pediatra");
-	        Paciente p2 = new Paciente("Ana Rita", "63", 10);
+	        Medico m2 = SistemaMedico.Retorna("2");
+	        Paciente p2 = SistemaPaciente.Retorna("13");
 	        consultas.add(new Consulta(m2, p2, data2));
 
 	        // Consulta 3
-	        Medico m3 = new Medico("Dra. GenteBoa", "64", "Dermatologista");
-	        Paciente p3 = new Paciente("João Games", "65", 30);
+	        Medico m3 = SistemaMedico.Retorna("3");
+	        Paciente p3 = SistemaPaciente.Retorna("14");
 	        consultas.add(new Consulta(m3, p3, data3));
 
 	        // Consulta 4
-	        Medico m4 = new Medico("Dr. Hans Chucrute", "66", "Ortopedista");
-	        Paciente p4 = new Paciente("José Roberto", "67", 55);
+	        Medico m4 = SistemaMedico.Retorna("4");
+	        Paciente p4 = SistemaPaciente.Retorna("15");
 	        consultas.add(new Consulta(m4, p4, data4));
 
 	        // Consulta 5
-	        Medico m5 = new Medico("Dra. Ericka", "68", "Neurologista");
-	        Paciente p5 = new Paciente("Fernanda Caetano", "69", 19);
+	        Medico m5 = SistemaMedico.Retorna("5");
+	        Paciente p5 = SistemaPaciente.Retorna("16");
 	        consultas.add(new Consulta(m5, p5, data5));
 
 	        // Consulta 6
-	        Medico m6 = new Medico("Dr. Volpi", "70", "Oftalmologista");
-	        Paciente p6 = new Paciente("Larissa Meirelles", "71", 37);
+	        Medico m6 = SistemaMedico.Retorna("6");
+	        Paciente p6 = SistemaPaciente.Retorna("17");
 	        consultas.add(new Consulta(m6, p6, data6));
 
 	        // Consulta 7
-	        Medico m7 = new Medico("Dr. Hannibal Lecter", "71", "Psiquiatra");
-	        Paciente p7 = new Paciente("Will Graham", "72", 28);
+	        Medico m7 = SistemaMedico.Retorna("7");
+	        Paciente p7 = SistemaPaciente.Retorna("18");
 	        consultas.add(new Consulta(m7, p7, data7));
 
 	  

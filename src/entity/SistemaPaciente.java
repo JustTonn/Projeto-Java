@@ -38,10 +38,10 @@ public class SistemaPaciente implements Gerenciamento {
 
 	// Método para cadastrar pacientes automáticamente
 	public void IncluirAuto() {
-		 pacientes.add(new Paciente("Everton Oliveira", "12", 25));
-	     pacientes.add(new Paciente("Maria Silva", "13", 30));
-	     pacientes.add(new Paciente("Thiago Sampaio", "14", 40));
-	     pacientes.add(new Paciente("Vitor Thadeu", "15", 18));
+		 pacientes.add(new Paciente("Estevao da Silva", "12", 25));
+	     pacientes.add(new Paciente("Thiago Silva", "13", 30));
+	     pacientes.add(new Paciente("Cole Palmer", "14", 40));
+	     pacientes.add(new Paciente("Artur Kronbauer", "15", 18));
 	     pacientes.add(new Paciente("Pedro Costa", "16", 55));
 	     pacientes.add(new Paciente("Juliana Geromel", "17", 32));
 	     pacientes.add(new Paciente("Lucas Arrascaeta", "18", 28));
@@ -112,7 +112,7 @@ public class SistemaPaciente implements Gerenciamento {
 		
 	}
 	
-	// Método auxiliar que retorna um objeto médico pelo CPF (usado por outras classes)
+	// Método auxiliar que retorna um objeto paciente pelo CPF (usado por outras classes)
 	public static Paciente Retorna(String cpf) {
 	    for (Paciente paciente : pacientes) {
 	        if (paciente.getCpf().equals(cpf)) {
