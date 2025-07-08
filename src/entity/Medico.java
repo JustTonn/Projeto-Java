@@ -19,14 +19,6 @@ public class Medico extends Pessoa  {
 		this.calculadoraSalario=calculadoraSalario;
 	}
 	
-	// Construtor alternativo com menos informações (sobrecarga)
-	public Medico(String nome, String cpf,String especialidade) {
-		super(nome, cpf);
-    	this.especialidade = especialidade;
-    	this.salarioHoraBase = 100.0;
-    	this.calculadoraSalario = especialidade.equalsIgnoreCase("Generalista") ?
-        new CalculoGeneralista() : new CalculoEspecialista();
-	}
 	
 	// Método que calcula o salário do médico
 	// Calcula o salário usando a lógica passada pela interface CalculadoraSalario
